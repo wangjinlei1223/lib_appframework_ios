@@ -14,7 +14,7 @@ PODS:
   - FBSDKCoreKit/Core (5.12.0):
     - FBSDKCoreKit/Basics
   - Flurry-iOS-SDK/FlurrySDK (10.1.0)
-  - lib_appframework_ios (3.0.0):
+  - lib_appframework_ios (3.0.1):
     - Alamofire
     - AppsFlyerFramework
     - Bolts
@@ -45,7 +45,7 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   FBSDKCoreKit: fa3ac4dc9b1afc9ae70b3de4dd704d1b6aeeed0d
   Flurry-iOS-SDK: be6bfad47f3b3c15a38b5e396935ef74512f1c38
-  lib_appframework_ios: 35a48cbded9b4d4ce3d64ec0f85aa00628070631
+  lib_appframework_ios: d8ae6851090cdf8422cc9a76d4308f5d57003a53
   MMKV: 031ae51aedc0af1b250922f7ed8a6b6ee2f94c4c
 
 PODFILE CHECKSUM: 457b2df85bd728d6f805ed6a51aa350c02990ebb
