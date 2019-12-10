@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'lib_appframework_ios_Example' do
+  pod 'lib_appframework_ios', :path => '../'
+
+  target 'lib_appframework_ios_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
