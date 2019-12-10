@@ -45,4 +45,5 @@ TODO: Add long description of the pod here.
   s.dependency 'Bolts'
   s.dependency 'Flurry-iOS-SDK/FlurrySDK'
   s.dependency 'AppsFlyerFramework'
+  s.dependency 'MMKV'
 end

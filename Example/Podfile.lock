@@ -20,6 +20,8 @@ PODS:
     - Bolts
     - FBSDKCoreKit
     - Flurry-iOS-SDK/FlurrySDK
+    - MMKV
+  - MMKV (1.0.23)
 
 DEPENDENCIES:
   - lib_appframework_ios (from `../`)
@@ -31,6 +33,7 @@ SPEC REPOS:
     - Bolts
     - FBSDKCoreKit
     - Flurry-iOS-SDK
+    - MMKV
 
 EXTERNAL SOURCES:
   lib_appframework_ios:
@@ -42,7 +45,8 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   FBSDKCoreKit: fa3ac4dc9b1afc9ae70b3de4dd704d1b6aeeed0d
   Flurry-iOS-SDK: be6bfad47f3b3c15a38b5e396935ef74512f1c38
-  lib_appframework_ios: c6d93a688976a8ed54b635b332cfd1a7a77adfa3
+  lib_appframework_ios: 35a48cbded9b4d4ce3d64ec0f85aa00628070631
+  MMKV: 031ae51aedc0af1b250922f7ed8a6b6ee2f94c4c
 
 PODFILE CHECKSUM: 457b2df85bd728d6f805ed6a51aa350c02990ebb
 
