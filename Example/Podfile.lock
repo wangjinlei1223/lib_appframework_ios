@@ -1,5 +1,5 @@
 PODS:
-  - lib_appframework_ios (0.1.0)
+  - lib_appframework_ios (3.0.0)
 
 DEPENDENCIES:
   - lib_appframework_ios (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  lib_appframework_ios: f9bb1f205ee89d6eb00868040b389ebd14c03638
+  lib_appframework_ios: a95d45877029c1656e17a76ef6d80111d845a253
 
 PODFILE CHECKSUM: 457b2df85bd728d6f805ed6a51aa350c02990ebb
 
