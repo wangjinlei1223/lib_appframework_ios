@@ -1,15 +1,48 @@
 PODS:
-  - lib_appframework_ios (3.0.0)
+  - Alamofire (4.9.1)
+  - AppsFlyerFramework (5.0.0)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
+  - FBSDKCoreKit (5.12.0):
+    - FBSDKCoreKit/Basics (= 5.12.0)
+    - FBSDKCoreKit/Core (= 5.12.0)
+  - FBSDKCoreKit/Basics (5.12.0)
+  - FBSDKCoreKit/Core (5.12.0):
+    - FBSDKCoreKit/Basics
+  - Flurry-iOS-SDK/FlurrySDK (10.1.0)
+  - lib_appframework_ios (3.0.0):
+    - Alamofire
+    - AppsFlyerFramework
+    - Bolts
+    - FBSDKCoreKit
+    - Flurry-iOS-SDK/FlurrySDK
 
 DEPENDENCIES:
   - lib_appframework_ios (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AppsFlyerFramework
+    - Bolts
+    - FBSDKCoreKit
+    - Flurry-iOS-SDK
 
 EXTERNAL SOURCES:
   lib_appframework_ios:
     :path: "../"
 
 SPEC CHECKSUMS:
-  lib_appframework_ios: a95d45877029c1656e17a76ef6d80111d845a253
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  AppsFlyerFramework: 06f3c13fea4068757004065db8ac75672f69520e
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  FBSDKCoreKit: fa3ac4dc9b1afc9ae70b3de4dd704d1b6aeeed0d
+  Flurry-iOS-SDK: be6bfad47f3b3c15a38b5e396935ef74512f1c38
+  lib_appframework_ios: c6d93a688976a8ed54b635b332cfd1a7a77adfa3
 
 PODFILE CHECKSUM: 457b2df85bd728d6f805ed6a51aa350c02990ebb
 

@@ -28,6 +28,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '10.0'
   s.swift_version = '5.0'
+  s.static_framework = true
 
   s.source_files = 'lib_appframework_ios/Classes/**/*'
   s.public_header_files = 'lib_appframework_ios/Classes/**/*.h'
@@ -38,4 +39,10 @@ TODO: Add long description of the pod here.
 
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+  
+  s.dependency 'Alamofire'
+  s.dependency 'FBSDKCoreKit'
+  s.dependency 'Bolts'
+  s.dependency 'Flurry-iOS-SDK/FlurrySDK'
+  s.dependency 'AppsFlyerFramework'
 end
