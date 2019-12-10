@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.static_framework = true
 
   s.source_files = 'lib_appframework_ios/Classes/**/*'
-  s.public_header_files = 'lib_appframework_ios/Classes/Public/*.h'
+  s.public_header_files = 'lib_appframework_ios/Classes/**/*.h'
   
   # s.resource_bundles = {
   #   'lib_appframework_ios' => ['lib_appframework_ios/Assets/*.png']
