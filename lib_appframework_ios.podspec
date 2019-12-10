@@ -24,7 +24,7 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://git.enerjoy.fun/common/lib_appframework_ios'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'wangjinlei1223' => 'jinlei.wang@enerjoy.life' }
-  s.source           = { :git => 'https://git.enerjoy.fun/common/lib_appframework_ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/wangjinlei1223/lib_appframework_ios.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
   s.swift_version = '5.0'
