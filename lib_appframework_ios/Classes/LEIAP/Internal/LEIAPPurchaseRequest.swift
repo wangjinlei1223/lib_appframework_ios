@@ -1,5 +1,5 @@
 //
-//  HSIAPPurchaseRequest.swift
+//  LEIAPPurchaseRequest.swift
 //  HSAppFramework
 //
 //  Created by jinlei.wang on 2019/10/16.
@@ -9,9 +9,9 @@ import StoreKit
 
 typealias PurchaseCompletion = (Bool, String?, String?, Double) -> Void
 
-class HSIAPPurchaseRequest: NSObject {
+class LEIAPPurchaseRequest: NSObject {
     private var completion: PurchaseCompletion?
-    private var productRequest: HSIAPProductRequest?
+    private var productRequest: LEIAPProductRequest?
     public var productID = ""
     
     /**
@@ -23,8 +23,8 @@ class HSIAPPurchaseRequest: NSObject {
     func purchase(productID: String, completion: PurchaseCompletion?) {
         self.productID = productID
         self.completion = completion
-        self.productRequest = HSIAPProductRequest()
-        self.productRequest?.start(productsID: [productID], completion: { [weak self] (sucess: Bool, products: [HSIAPProduct]?, error: String?) in
+        self.productRequest = LEIAPProductRequest()
+        self.productRequest?.start(productsID: [productID], completion: { [weak self] (sucess: Bool, products: [LEIAPProduct]?, error: String?) in
             if sucess {
                 let skProduct = products?.first?.skProduct
                 if let product = skProduct {

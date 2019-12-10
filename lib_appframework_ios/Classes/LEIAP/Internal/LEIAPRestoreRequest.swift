@@ -1,5 +1,5 @@
 //
-//  HSIAPRestoreRequest.swift
+//  LEIAPRestoreRequest.swift
 //  HSAppFramework
 //
 //  Created by jinlei.wang on 2019/10/17.
@@ -9,7 +9,7 @@ import StoreKit
 
 typealias RestoreCompletion = (Bool, String?, String?, Double) -> Void
 
-class HSIAPRestoreRequest: NSObject, SKRequestDelegate {
+class LEIAPRestoreRequest: NSObject, SKRequestDelegate {
     private var receiptRequest: SKReceiptRefreshRequest?
     private var completion: RestoreCompletion?
     

@@ -11,19 +11,19 @@ import Foundation
 let HSDiverseSession_Notification_SessionStart = Notification.Name("HSDiverseSession_Notification_SessionStart");
 let HSDiverseSession_Notification_SessionEnd = Notification.Name("HSDiverseSession_Notification_SessionEnd");
 
-public class HSDiverseSession {
+public class LEDiverseSession {
     private var startCount: Int = 0
     private var endCount: Int = 0
 
-    static let shared = HSDiverseSession()
+    static let shared = LEDiverseSession()
 
     private init() {
         // 如果配为true，代表由app接管，false由Appframework接管
-        if !HSDiverseSession.isAppManageDiverseSession() {
+        if !LEDiverseSession.isAppManageDiverseSession() {
             print("AppManageDiverseSession == false, DiverseSession is triggered by Appframework");
 #if !TARGET_IS_EXTENSION
-            NotificationCenter.default.addObserver(self, selector: #selector(handleSessionDidStart(_:)), name: kHSNotificationName_SessionDidStart, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(handleSessionDidEnd(_:)), name: kHSNotificationName_SessionDidEnd, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(handleSessionDidStart(_:)), name: kLENotificationName_SessionDidStart, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(handleSessionDidEnd(_:)), name: kLENotificationName_SessionDidEnd, object: nil)
 #endif
         }else{
             print("AppManageDiverseSession == true, DiverseSession is triggered by app");
@@ -45,7 +45,7 @@ public class HSDiverseSession {
     func start() {
         print("Start Begin: startCount: %d, endCount:%d", startCount, endCount);
 
-        if !HSDiverseSession.isAppManageDiverseSession() {
+        if !LEDiverseSession.isAppManageDiverseSession() {
 
             print("AppManageDiverseSession == false, DiverseSession is triggered by Appframework, could not send start");
 #if DEBUG
@@ -73,7 +73,7 @@ public class HSDiverseSession {
     func end() {
         print("End Begin: startCount: %d, endCount:%d", startCount, endCount);
 
-        if !HSDiverseSession.isAppManageDiverseSession() {
+        if !LEDiverseSession.isAppManageDiverseSession() {
             print("AppManageDiverseSession == false, DiverseSession is triggered by Appframework, could not send end");
 
 #if DEBUG

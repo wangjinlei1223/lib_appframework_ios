@@ -109,7 +109,7 @@ class Utils: NSObject {
     *  @return AppleSecurityApplicationGroup 对应的值
     */
     class func appSecurityApplicationGroup() -> String? {
-        let dataDic = NSDictionary.init(dictionary: HSLocalConfig.instance.data!)
+        let dataDic = NSDictionary.init(dictionary: LELocalConfig.instance.data!)
         return dataDic.value(forKeyPath: "libCommons.Entitlements.AppleSecurityApplicationGroup") as? String
     }
     
@@ -138,7 +138,7 @@ class Utils: NSObject {
     }
     
     class func appID() -> String? {
-        let dataDic = NSDictionary.init(dictionary: HSLocalConfig.instance.data!)
+        let dataDic = NSDictionary.init(dictionary: LELocalConfig.instance.data!)
         let appId : String = dataDic.value(forKeyPath: "libCommons.AppID") as? String ?? ""
         return appId.count < 1 ? nil : appId
     }

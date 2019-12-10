@@ -1,5 +1,5 @@
 //
-//  HSAnalytics.swift
+//  LEAnalytics.swift
 //  HSAppFramework
 //
 //  Created by ying on 2019/10/17.
@@ -21,16 +21,16 @@ func APPSFLYER_ENABLED() -> Bool {
     return GDPRAssent.shareInstance.isGDPRAccepted()
 }
 
-@objc class HSAnalytics : NSObject {
+public class LEAnalytics : NSObject {
     private var facebookAppID: String?
     private var purchaseContentID: String?
     private var registration: String?
     private var spentCredits: String?
     private var analyticsCount = 0
     
-    @objc static let sharedInstance = HSAnalytics();
+    public static let sharedInstance = LEAnalytics();
     
-    override init() {
+    private override init() {
         super.init()
         analyticsCount = 0
     }
@@ -40,7 +40,7 @@ func APPSFLYER_ENABLED() -> Bool {
             return
         }
         
-        let analyticsConfig = HSLocalConfig.instance.data?["libCommons.Analytics"] as? [AnyHashable : Any]
+        let analyticsConfig = LELocalConfig.instance.data?["libCommons.Analytics"] as? [AnyHashable : Any]
         let appIsNotMultitask = Bundle.main.object(forInfoDictionaryKey: "UIApplicationExitsOnSuspend")
         if (appIsNotMultitask as? NSNumber)?.boolValue ?? false {
             Flurry.setSessionReportsOnCloseEnabled(false)
@@ -59,9 +59,9 @@ func APPSFLYER_ENABLED() -> Bool {
         builder?.withIncludeBackgroundSessions(inMetrics: isBGSessionEnabled)
         Flurry.startSession(flurryKey ?? "", withOptions: options, with: builder)
         if System.currentSystem.isMultitaskingSupported {
-            NotificationCenter.default.addObserver(self, selector: #selector(resetAnalyticsCount), name: kHSNotificationName_SessionDidStart, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(resetAnalyticsCount), name: kLENotificationName_SessionDidStart, object: nil)
             if isBGSessionEnabled {
-                NotificationCenter.default.addObserver(self, selector: #selector(pauseFlurryBackgroundSession), name: kHSNotificationName_SessionDidEnd, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(pauseFlurryBackgroundSession), name: kLENotificationName_SessionDidEnd, object: nil)
             }
         }
     }
@@ -70,7 +70,7 @@ func APPSFLYER_ENABLED() -> Bool {
         var parameters: [AnyHashable : Any] = [:]
         
         var useCount: String? = nil
-        let count = HSSessionManager.shared.currentSessionID
+        let count = LESessionManager.shared.currentSessionID
         if count < 5 {
             useCount = "0-4"
         } else if count >= 5 && count < 10 {
@@ -85,7 +85,7 @@ func APPSFLYER_ENABLED() -> Bool {
         parameters["UsageCount"] = useCount
         
         var useTime: String? = nil
-        let time = HSSessionManager.shared.totalUsageSeconds
+        let time = LESessionManager.shared.totalUsageSeconds
         if time <= 300 {
             useTime = "0-5min"
         } else if time > 300 && time <= 600 {
@@ -99,7 +99,7 @@ func APPSFLYER_ENABLED() -> Bool {
         }
         
         parameters["UsageTime"] = useTime
-        parameters["FirmwareVersion"] = HSVersionControl.osVersion()
+        parameters["FirmwareVersion"] = LEVersionControl.osVersion()
         parameters["DevicePlatform"] = System.currentSystem.platform
         
         if userInfo != nil {
@@ -127,12 +127,12 @@ func APPSFLYER_ENABLED() -> Bool {
 
     func baseInfo() -> [AnyHashable : Any] {
         var baseInfo: [AnyHashable : Any] = [:]
-        baseInfo["UserType"] = HSVersionControl.isFirstLaunchSinceInstallation() ? "NewUser" : "OldUser"
+        baseInfo["UserType"] = LEVersionControl.isFirstLaunchSinceInstallation() ? "NewUser" : "OldUser"
         return baseInfo
     }
     
     func log(_ format: String?, _ args: CVarArg...) {
-        if HSApplication.isDebugEnabled() {
+        if LEApplication.isDebugEnabled() {
             let text = String(format: format ?? "", args)
             print("\(text)")
         }
@@ -371,8 +371,8 @@ func APPSFLYER_ENABLED() -> Bool {
 //        DebugLog("AppsFlyer record eventname: %@, values: %@", eventName, eventValues)
     }
 
-    @objc func setup(withOptions options: [AnyHashable : Any]?) {
-        let analyticsConfig = HSLocalConfig.instance.data?["libCommons.Analytics"] as? [AnyHashable : Any]
+    @objc public func setup(withOptions options: [AnyHashable : Any]?) {
+        let analyticsConfig = LELocalConfig.instance.data?["libCommons.Analytics"] as? [AnyHashable : Any]
         if NSString(string: UIDevice.current.systemVersion).floatValue > 8 {
             if GDPRAssent.shareInstance.isGDPRAccepted() {
                 initFlurry(withOptions: options)
@@ -385,7 +385,7 @@ func APPSFLYER_ENABLED() -> Bool {
             }
         }
         facebookAppID = analyticsConfig?["FacebookID"] as? String
-        NotificationCenter.default.addObserver(self, selector: #selector(pingBackFacebook), name: kHSNotificationName_SessionDidStart, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pingBackFacebook), name: kLENotificationName_SessionDidStart, object: nil)
         let appID = analyticsConfig?["AppleAppID"] as? String
         log("\n================================================\n[HSAnalytics with Apple App ID:\(appID ?? "").\n================================================")
     }

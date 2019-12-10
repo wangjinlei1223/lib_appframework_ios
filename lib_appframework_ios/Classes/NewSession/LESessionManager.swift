@@ -8,16 +8,15 @@
 
 import Foundation
 
+let kLENotificationName_SessionDidStart = NSNotification.Name("kLENotificationName_SessionDidStart")
+let kLENotificationName_SessionDidEnd = NSNotification.Name("kLENotificationName_SessionDidEnd")
 
-let kHSNotificationName_SessionDidStart = NSNotification.Name("kHSNotificationName_SessionDidStart")
-let kHSNotificationName_SessionDidEnd = NSNotification.Name("kHSNotificationName_SessionDidEnd")
+private let kLEUserDefaultsKey_FirstSessionStartTime = "kLEUserDefaultsKey_FirstSessionStartTime"
+private let kLEUserDefaultsKey_LastSessionEndTime = "kLEUserDefaultsKey_LastSessionEndTime"
+private let kLEUserDefaultsKey_TotalUsageSeconds = "kLEUserDefaultsKey_TotalUsageSeconds"
+private let kLEUserDefaultsKey_TotalSessionCount = "kLEUserDefaultsKey_TotalSessionCount"
 
-private let kHSUserDefaultsKey_FirstSessionStartTime = "kHSUserDefaultsKey_FirstSessionStartTime"
-private let kHSUserDefaultsKey_LastSessionEndTime = "kHSUserDefaultsKey_LastSessionEndTime"
-private let kHSUserDefaultsKey_TotalUsageSeconds = "kHSUserDefaultsKey_TotalUsageSeconds"
-private let kHSUserDefaultsKey_TotalSessionCount = "kHSUserDefaultsKey_TotalSessionCount"
-
-public final class HSSessionManager {
+public final class LESessionManager {
 
     private static var sIsSessionManagerEnabled: Bool = true
     private var isSessionStarted: Bool = false
@@ -29,7 +28,7 @@ public final class HSSessionManager {
     private (set) var currentSessionID: Int
     private (set) var totalUsageSeconds: Double
 
-    public static let shared = HSSessionManager()
+    public static let shared = LESessionManager()
 
     private init() {
 
@@ -37,11 +36,11 @@ public final class HSSessionManager {
         isSessionStarted = false;
 
         let defaults = UserDefaults.standard;
-        firstSessionStartTime = defaults.object(forKey: kHSUserDefaultsKey_FirstSessionStartTime) as? Date;
-        lastSessionEndTime = defaults.object(forKey: kHSUserDefaultsKey_LastSessionEndTime) as? Date;
+        firstSessionStartTime = defaults.object(forKey: kLEUserDefaultsKey_FirstSessionStartTime) as? Date;
+        lastSessionEndTime = defaults.object(forKey: kLEUserDefaultsKey_LastSessionEndTime) as? Date;
         
-        currentSessionID = defaults.integer(forKey: kHSUserDefaultsKey_TotalSessionCount);
-        totalUsageSeconds = defaults.double(forKey: kHSUserDefaultsKey_TotalUsageSeconds);
+        currentSessionID = defaults.integer(forKey: kLEUserDefaultsKey_TotalSessionCount);
+        totalUsageSeconds = defaults.double(forKey: kLEUserDefaultsKey_TotalUsageSeconds);
     }
     
     class func disableSessionNotification() {
@@ -49,10 +48,10 @@ public final class HSSessionManager {
     }
 
     func enableAndPostSessionNotificationIfNeeded() {
-        if HSSessionManager.sIsSessionManagerEnabled == false && isSessionStarted {
-            NotificationCenter.default.post(name: kHSNotificationName_SessionDidStart, object: nil)
+        if LESessionManager.sIsSessionManagerEnabled == false && isSessionStarted {
+            NotificationCenter.default.post(name: kLENotificationName_SessionDidStart, object: nil)
         }
-        HSSessionManager.sIsSessionManagerEnabled = true
+        LESessionManager.sIsSessionManagerEnabled = true
     }
 
     func startSession() {
@@ -67,18 +66,18 @@ public final class HSSessionManager {
         currentSessionID += 1
 
         let defaults = UserDefaults.standard
-        defaults.set(currentSessionID, forKey: kHSUserDefaultsKey_TotalSessionCount)
+        defaults.set(currentSessionID, forKey: kLEUserDefaultsKey_TotalSessionCount)
 
         if firstSessionStartTime == nil {
             firstSessionStartTime = currentSessionStartTime
-            defaults.set(firstSessionStartTime, forKey: kHSUserDefaultsKey_FirstSessionStartTime)
+            defaults.set(firstSessionStartTime, forKey: kLEUserDefaultsKey_FirstSessionStartTime)
         } else {
-            firstSessionStartTime = defaults.object(forKey: kHSUserDefaultsKey_FirstSessionStartTime) as? Date
+            firstSessionStartTime = defaults.object(forKey: kLEUserDefaultsKey_FirstSessionStartTime) as? Date
         }
         defaults.synchronize()
 
-        if HSSessionManager.sIsSessionManagerEnabled {
-            NotificationCenter.default.post(name: kHSNotificationName_SessionDidStart, object: nil)
+        if LESessionManager.sIsSessionManagerEnabled {
+            NotificationCenter.default.post(name: kLENotificationName_SessionDidStart, object: nil)
         }
 
         //todo Analytics
@@ -98,14 +97,14 @@ public final class HSSessionManager {
         totalUsageSeconds += lastSessionEndTime?.timeIntervalSince(currentSessionStartTime ?? Date()) ?? 0
 
         let defaults = UserDefaults.standard;
-        defaults.set(totalUsageSeconds, forKey: kHSUserDefaultsKey_TotalUsageSeconds)
-        defaults.set(lastSessionEndTime, forKey: kHSUserDefaultsKey_LastSessionEndTime)
+        defaults.set(totalUsageSeconds, forKey: kLEUserDefaultsKey_TotalUsageSeconds)
+        defaults.set(lastSessionEndTime, forKey: kLEUserDefaultsKey_LastSessionEndTime)
         defaults.synchronize()
 
         isSessionStarted = false
 
-        if HSSessionManager.sIsSessionManagerEnabled {
-            NotificationCenter.default.post(name: kHSNotificationName_SessionDidEnd, object: nil)
+        if LESessionManager.sIsSessionManagerEnabled {
+            NotificationCenter.default.post(name: kLENotificationName_SessionDidEnd, object: nil)
         }
 
         isFirstSessionInCurrentLaunch = false

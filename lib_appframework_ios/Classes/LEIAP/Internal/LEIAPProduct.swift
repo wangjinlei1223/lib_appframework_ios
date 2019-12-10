@@ -1,5 +1,5 @@
 //
-//  HSIAPProduct.swift
+//  LEIAPProduct.swift
 //  HSAppFramework
 //
 //  Created by jinlei.wang on 2019/10/16.
@@ -7,7 +7,7 @@
 //
 import StoreKit
 
-public class HSIAPProduct: NSObject {
+public class LEIAPProduct: NSObject {
     /**
      商品ID
      */

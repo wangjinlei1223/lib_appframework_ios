@@ -7,7 +7,7 @@
 //
 import UIKit
 
-enum HSIAPEnv {
+enum LEIAPEnv {
     case defaults
     case debug
     case release
@@ -15,7 +15,7 @@ enum HSIAPEnv {
 
 typealias VerifyCompletion = (Bool, String?, String?, Double) -> Void
 
-class HSIAPVerifyUtil: NSObject {
+class LEIAPVerifyUtil: NSObject {
     
     /**
     验证发票信息
@@ -24,7 +24,7 @@ class HSIAPVerifyUtil: NSObject {
      - parameter password: 共享密钥
      - parameter completion: 验证结果回调
     */
-    static func verify(env: HSIAPEnv, password: String?, completion: VerifyCompletion?) {
+    static func verify(env: LEIAPEnv, password: String?, completion: VerifyCompletion?) {
         
         let appStoreReceiptURL = Bundle.main.appStoreReceiptURL
         
@@ -49,7 +49,7 @@ class HSIAPVerifyUtil: NSObject {
             parameters["password"] = verifyPassword
         }
         
-        HSNetworkUtils.post(url: verifyReceiptURL(env: env), parameters: parameters) { (success: Bool, error: Error?, result: Any?) in
+        LENetworkUtils.post(url: verifyReceiptURL(env: env), parameters: parameters) { (success: Bool, error: Error?, result: Any?) in
             if !success {
                 if let verifyCompletion = completion {
                     verifyCompletion(false, error?.localizedDescription, nil, 0.0)
@@ -151,7 +151,7 @@ class HSIAPVerifyUtil: NSObject {
         return (productID, productExpiresDateMS)
     }
     
-    private static func verifyReceiptURL(env: HSIAPEnv) -> String {
+    private static func verifyReceiptURL(env: LEIAPEnv) -> String {
         if env == .debug {
             return "https://sandbox.itunes.apple.com/verifyReceipt"
         }

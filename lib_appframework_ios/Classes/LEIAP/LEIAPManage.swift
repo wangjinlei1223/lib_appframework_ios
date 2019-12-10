@@ -1,5 +1,5 @@
 //
-//  HSIAPManage.swift
+//  LEIAPManage.swift
 //  HSAppFramework
 //
 //  Created by jinlei.wang on 2019/10/17.
@@ -7,15 +7,15 @@
 //
 import StoreKit
 
-public let kHSIAPPurchaseSucceedNotification = "kHSIAPPurchaseSucceedNotification"
+public let kLEIAPPurchaseSucceedNotification = "kLEIAPPurchaseSucceedNotification"
 
-public class HSIAPManage: NSObject, SKPaymentTransactionObserver {
-    private var productsRequest: HSIAPProductRequest?
-    private var purchaseRequest: HSIAPPurchaseRequest?
-    private var restoreRequest: HSIAPRestoreRequest?
+public class LEIAPManage: NSObject, SKPaymentTransactionObserver {
+    private var productsRequest: LEIAPProductRequest?
+    private var purchaseRequest: LEIAPPurchaseRequest?
+    private var restoreRequest: LEIAPRestoreRequest?
     private var verifyReceiptPassword: String?
     
-    public static let sharedInstance = HSIAPManage()
+    public static let sharedInstance = LEIAPManage()
 
     private override init() {
         super.init()
@@ -72,7 +72,7 @@ public class HSIAPManage: NSObject, SKPaymentTransactionObserver {
      - parameter productsID: 待请求的商品列表
      - parameter completion: 请求结果回调
      */
-    public func requestProducts(productsID: [String], completion: ((Bool, [HSIAPProduct]?, String?) -> Void)?) {
+    public func requestProducts(productsID: [String], completion: ((Bool, [LEIAPProduct]?, String?) -> Void)?) {
         if self.productsRequest != nil {
             if let requestCompletion = completion {
                 requestCompletion(false, nil, "requesting,please try again later");
@@ -80,8 +80,8 @@ public class HSIAPManage: NSObject, SKPaymentTransactionObserver {
             return
         }
         
-        self.productsRequest = HSIAPProductRequest()
-        self.productsRequest?.start(productsID: productsID, completion: { [weak self] (sucess: Bool, products: [HSIAPProduct]?, error: String?) in
+        self.productsRequest = LEIAPProductRequest()
+        self.productsRequest?.start(productsID: productsID, completion: { [weak self] (sucess: Bool, products: [LEIAPProduct]?, error: String?) in
             if let requestCompletion = completion {
                 requestCompletion(sucess, products, error);
             }
@@ -110,7 +110,7 @@ public class HSIAPManage: NSObject, SKPaymentTransactionObserver {
             }
         }
         
-        self.purchaseRequest = HSIAPPurchaseRequest()
+        self.purchaseRequest = LEIAPPurchaseRequest()
         self.purchaseRequest?.purchase(productID: productID, completion: { [weak self] (sucess: Bool, error: String?, productID: String?, expireDateMS: Double) in
             if let purchaseCompletion = completion {
                 purchaseCompletion(sucess, error, productID, expireDateMS);
@@ -132,7 +132,7 @@ public class HSIAPManage: NSObject, SKPaymentTransactionObserver {
             }
         }
         
-        self.restoreRequest = HSIAPRestoreRequest()
+        self.restoreRequest = LEIAPRestoreRequest()
         self.restoreRequest?.restore(completion: { [weak self] (success: Bool, error: String?, productID: String?, expireDateMS: Double) in
             if let restoreCompletion = completion {
                 restoreCompletion(success, error, productID, expireDateMS);
@@ -152,7 +152,7 @@ public class HSIAPManage: NSObject, SKPaymentTransactionObserver {
      - parameter completion: 验证结果回调
      */
     public func verifyReceipt(completion: ((Bool, String?, String?, Double) -> Void)?) {
-        HSIAPVerifyUtil.verify(env: .defaults, password: self.verifyReceiptPassword) { (success: Bool, error: String?, productID: String?, expireDateMS: Double) in
+        LEIAPVerifyUtil.verify(env: .defaults, password: self.verifyReceiptPassword) { (success: Bool, error: String?, productID: String?, expireDateMS: Double) in
             if let verifyCompletion = completion {
                 verifyCompletion(success, error, productID, expireDateMS);
             }
@@ -173,7 +173,7 @@ public class HSIAPManage: NSObject, SKPaymentTransactionObserver {
     
     private func postPurchasSucceedNotification(success: Bool) {
         if success {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kHSIAPPurchaseSucceedNotification), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: kLEIAPPurchaseSucceedNotification), object: nil)
         }
     }
     

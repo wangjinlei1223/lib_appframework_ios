@@ -63,7 +63,7 @@ class SearchAds: NSObject {
             }
         }
         
-        HSAnalytics.sharedInstance.logEvent("HSSearchAds_AttributionDetails", withParameters: logDetails)
+        LEAnalytics.sharedInstance.logEvent("HSSearchAds_AttributionDetails", withParameters: logDetails)
         UserDefaults.standard.set(detailValueDictionary, forKey: kUserDefaultsKey_SearchAdsAttributionDetails)
         UserDefaults.standard.set(true, forKey: kUserDefaultsKey_SearchAdsAttributionDetailsFetched)
         UserDefaults.standard.synchronize()

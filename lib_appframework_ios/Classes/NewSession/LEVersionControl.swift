@@ -1,5 +1,5 @@
 //
-//  HSVersionControl.swift
+//  LEVersionControl.swift
 //  HSAppFramework
 //
 //  Created by long.liu on 2019/10/14.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final class HSVersionControl {
+final class LEVersionControl {
     class func appVersion() -> String? {
         let shortVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String;
         return shortVersion;
@@ -20,31 +20,31 @@ final class HSVersionControl {
     }
     
     class func isFirstLaunchSinceInstallation() -> Bool {
-        return HSApplication.sharedInstance().currentLaunchInfo?.launchID == 1;
+        return LEApplication.sharedInstance().currentLaunchInfo?.launchID == 1;
     }
     
     class func isFirstLaunchSinceOSUpgrade() -> Bool {
-        return HSVersionControl.compareVersion(formVersion: HSApplication.sharedInstance().currentLaunchInfo?.osVersion, toVersion: HSApplication.sharedInstance().lastLaunchInfo?.osVersion) == .orderedDescending
+        return LEVersionControl.compareVersion(formVersion: LEApplication.sharedInstance().currentLaunchInfo?.osVersion, toVersion: LEApplication.sharedInstance().lastLaunchInfo?.osVersion) == .orderedDescending
     }
     
     class func isFirstLaunchSinceUpgrade() -> Bool {
-        return HSVersionControl.compareVersion(formVersion: HSApplication.sharedInstance().currentLaunchInfo?.appVersion, toVersion: HSApplication.sharedInstance().lastLaunchInfo?.appVersion) == .orderedDescending
+        return LEVersionControl.compareVersion(formVersion: LEApplication.sharedInstance().currentLaunchInfo?.appVersion, toVersion: LEApplication.sharedInstance().lastLaunchInfo?.appVersion) == .orderedDescending
     }
     
     class func isFirstSessionSinceInstallation() -> Bool {
-        return HSSessionManager.shared.currentSessionID == 1 && HSSessionManager.shared.isFirstSessionInCurrentLaunch
+        return LESessionManager.shared.currentSessionID == 1 && LESessionManager.shared.isFirstSessionInCurrentLaunch
     }
     
     class func isFirstSessionSinceOSUpgrade() -> Bool {
-        return self.isFirstLaunchSinceOSUpgrade() && HSSessionManager.shared.isFirstSessionInCurrentLaunch
+        return self.isFirstLaunchSinceOSUpgrade() && LESessionManager.shared.isFirstSessionInCurrentLaunch
     }
     
     class func isFirstSessionSinceUpgrade() ->Bool {
-        return self.isFirstLaunchSinceUpgrade() && HSSessionManager.shared.isFirstSessionInCurrentLaunch
+        return self.isFirstLaunchSinceUpgrade() && LESessionManager.shared.isFirstSessionInCurrentLaunch
     }
 
     class func isUpdateUser() -> Bool {
-        return !(HSApplication.sharedInstance().firstLaunchInfo?.appVersion == HSApplication.sharedInstance().currentLaunchInfo?.appVersion)
+        return !(LEApplication.sharedInstance().firstLaunchInfo?.appVersion == LEApplication.sharedInstance().currentLaunchInfo?.appVersion)
     }
     
     //todo 这个访问权限的测试一下用哪个 public、open、internal、fileprivate、private

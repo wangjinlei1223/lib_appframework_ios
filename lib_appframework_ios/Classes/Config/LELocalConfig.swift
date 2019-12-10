@@ -1,5 +1,5 @@
 //
-//  HSLocalConfig.swift
+//  LELocalConfig.swift
 //  HSAppFramework
 //
 //  Created by JackSparrow on 2019/10/21.
@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 
-@objc class HSLocalConfig : NSObject  {
-    @objc static let instance = HSLocalConfig()
+@objc class LELocalConfig : NSObject  {
+    @objc static let instance = LELocalConfig()
     @objc var data : NSDictionary? = nil
     
     private override init() {}
@@ -45,7 +45,7 @@ import UIKit
 
         let decodeData = NSData(base64Encoded: NSString(bytes: key, length: 24, encoding: String.Encoding.utf8.rawValue)! as String, options: NSData.Base64DecodingOptions.init())
         let decodeKey = NSString.init(data: decodeData! as Data, encoding: String.Encoding.utf8.rawValue)
-        let decryptedData = HSAESUtils.aes256DecryptData(data, withKey: decodeKey as String?)
+        let decryptedData = LEAESUtils.aes256DecryptData(data, withKey: decodeKey as String?)
         return decryptedData
     }
     

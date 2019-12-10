@@ -1,5 +1,5 @@
 //
-//  HSIAPProductRequest.swift
+//  LEIAPProductRequest.swift
 //  HSAppFramework
 //
 //  Created by jinlei.wang on 2019/10/16.
@@ -7,9 +7,9 @@
 //
 import StoreKit
 
-typealias RequestCompletion = (Bool, [HSIAPProduct]?, String?) -> Void
+typealias RequestCompletion = (Bool, [LEIAPProduct]?, String?) -> Void
 
-class HSIAPProductRequest: NSObject, SKProductsRequestDelegate {
+class LEIAPProductRequest: NSObject, SKProductsRequestDelegate {
     private var productsRequest: SKProductsRequest?
     private var completion: RequestCompletion?
 
@@ -39,7 +39,7 @@ class HSIAPProductRequest: NSObject, SKProductsRequestDelegate {
      - parameter products: 商品列表
      - parameter error:    错误信息
      */
-    private func finish(success: Bool, products: [HSIAPProduct]?, error: String?) {
+    private func finish(success: Bool, products: [LEIAPProduct]?, error: String?) {
         if let requestCompletion = self.completion {
             DispatchQueue.main.async {
                 requestCompletion(success, products, error)
@@ -58,9 +58,9 @@ class HSIAPProductRequest: NSObject, SKProductsRequestDelegate {
             return
         }
         
-        var products = [HSIAPProduct]()
+        var products = [LEIAPProduct]()
         for skProduct in response.products {
-            let product = HSIAPProduct()
+            let product = LEIAPProduct()
             product.productID = skProduct.productIdentifier
             product.localizedTitle = skProduct.localizedTitle
             product.localizedDescription = skProduct.localizedDescription

@@ -6,7 +6,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HSAESUtils : NSObject
+@interface LEAESUtils : NSObject
 
 + (NSData *)AES256EncryptData:(NSData *)data withKey:(NSString *)key;
 + (NSData *)AES256DecryptData:(NSData *)data withKey:(NSString *)key;

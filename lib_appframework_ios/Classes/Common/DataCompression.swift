@@ -19,7 +19,6 @@ public struct CompressionLevel: RawRepresentable {
     
     public static let defaultCompression = CompressionLevel(Z_DEFAULT_COMPRESSION)
     
-    
     public init(rawValue: Int32) {
         
         self.rawValue = rawValue

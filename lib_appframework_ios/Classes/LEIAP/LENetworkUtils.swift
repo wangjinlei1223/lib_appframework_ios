@@ -1,5 +1,5 @@
 //
-//  HSNetworkUtils.swift
+//  LENetworkUtils.swift
 //  HSAppFramework
 //
 //  Created by jinlei.wang on 2019/10/17.
@@ -7,7 +7,7 @@
 //
 import Alamofire
 
-public class HSNetworkUtils: NSObject {
+public class LENetworkUtils: NSObject {
     
     /**
      GET 请求
